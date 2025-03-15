@@ -1,0 +1,20 @@
+{
+    "name": "SoftEther VPN",
+    "dockerFile": "Dockerfile",
+    "build": {
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "christian-kohler.path-intellisense"
+            ]
+        }
+    },
+    "runArgs": [
+        "--privileged",
+        "-v", "/usr/bin/docker:/usr/bin/docker",
+        "-v", "/var/run/docker.sock:/var/run/docker.sock"
+    ]
+}
