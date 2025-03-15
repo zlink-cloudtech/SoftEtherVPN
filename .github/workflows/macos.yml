@@ -1,4 +1,11 @@
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - 'feature/actions-test'
+  pull_request:
+    branches-ignore:
+      - 'feature/actions-test'
 
 permissions:
   contents: read

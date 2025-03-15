@@ -1,6 +1,12 @@
 name: alpine/musl
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - 'feature/actions-test'
+  pull_request:
+    branches-ignore:
+      - 'feature/actions-test'
 
 permissions:
   contents: read
