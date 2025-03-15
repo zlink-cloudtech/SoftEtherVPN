@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - 'product/zlinkcloudtech'
+      - 'feature/actions-test'
     tags:
       - '*'
   pull_request:
@@ -20,7 +21,7 @@ jobs:
         id: metavpnserver
         uses: docker/metadata-action@v5
         with:
-          images: ${{ github.repository_owner }}/vpnserver
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/vpnserver
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=pr
@@ -31,7 +32,7 @@ jobs:
         id: metavpnclient
         uses: docker/metadata-action@v5
         with:
-          images: ${{ github.repository_owner }}/vpnclient
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/vpnclient
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=pr
@@ -42,7 +43,7 @@ jobs:
         id: metavpnbridge
         uses: docker/metadata-action@v5
         with:
-          images: ${{ github.repository_owner }}/vpnbridge
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/vpnbridge
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=pr
@@ -72,7 +73,7 @@ jobs:
         with:
           file: ./Dockerfile
           target: vpnserver
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref != 'refs/heads/feature/actions-test' }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.metavpnserver.outputs.tags }}
           labels: ${{ steps.metavpnserver.outputs.labels }}
@@ -82,7 +83,7 @@ jobs:
         with:
           file: ./Dockerfile
           target: vpnclient
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref != 'refs/heads/feature/actions-test' }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.metavpnclient.outputs.tags }}
           labels: ${{ steps.metavpnclient.outputs.labels }}
@@ -92,7 +93,7 @@ jobs:
         with:
           file: ./Dockerfile
           target: vpnbridge
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref != 'refs/heads/feature/actions-test' }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.metavpnbridge.outputs.tags }}
           labels: ${{ steps.metavpnbridge.outputs.labels }}

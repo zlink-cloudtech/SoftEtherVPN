@@ -4,7 +4,11 @@ on:
   schedule:
     - cron: "0 0 25 * *"
   push:
+    branches-ignore:
+      - 'feature/actions-test'
   pull_request:
+    branches-ignore:
+      - 'feature/actions-test'
   workflow_dispatch:
 
 permissions:
