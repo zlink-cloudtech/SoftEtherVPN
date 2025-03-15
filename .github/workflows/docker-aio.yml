@@ -3,7 +3,7 @@ name: docker-aio
 on:
   push:
     branches: 
-      - 'master'
+      - 'product/zlinkcloudtech'
     tags:
       - '*'
   pull_request:
@@ -13,7 +13,7 @@ jobs:
   docker:
     name: docker-aio
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == 'SoftEtherVPN' }}
+    if: ${{ github.repository_owner == 'zlink-cloudtech' }}
     steps:
       -
         name: Docker meta vpnserver
